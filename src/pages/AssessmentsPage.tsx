@@ -20,41 +20,41 @@ export default function AssessmentsPage() {
   if (selectedQuiz && activeQuiz?.questions) {
     return (
       <div className="max-w-3xl mx-auto space-y-6">
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-xl font-bold">{activeQuiz.title}</h2>
-              <p className="text-sm text-gray-500">{activeQuiz.courseCode} • {activeQuiz.totalPoints} points • {activeQuiz.duration} minutes</p>
+              <h2 className="text-xl font-bold dark:text-white">{activeQuiz.title}</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{activeQuiz.courseCode} • {activeQuiz.totalPoints} points • {activeQuiz.duration} minutes</p>
             </div>
-            <button onClick={() => { setSelectedQuiz(null); setQuizSubmitted(false); setQuizAnswers({}); }} className="text-sm text-blue-600 font-medium">← Back</button>
+            <button onClick={() => { setSelectedQuiz(null); setQuizSubmitted(false); setQuizAnswers({}); }} className="text-sm text-blue-600 dark:text-blue-400 font-medium">← Back</button>
           </div>
 
           {quizSubmitted ? (
             <div className="text-center py-8">
               <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-emerald-700">Quiz Submitted!</h3>
-              <p className="text-gray-500 mt-2">Your answers have been recorded. Results will be available after grading.</p>
-              <div className="mt-6 bg-emerald-50 rounded-xl p-4 inline-block">
-                <p className="text-sm text-emerald-700">Answered: {Object.keys(quizAnswers).length}/{activeQuiz.questions.length} questions</p>
+              <h3 className="text-xl font-bold text-emerald-700 dark:text-emerald-400">Quiz Submitted!</h3>
+              <p className="text-gray-500 dark:text-gray-400 mt-2">Your answers have been recorded. Results will be available after grading.</p>
+              <div className="mt-6 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-4 inline-block">
+                <p className="text-sm text-emerald-700 dark:text-emerald-400">Answered: {Object.keys(quizAnswers).length}/{activeQuiz.questions.length} questions</p>
               </div>
             </div>
           ) : (
             <div className="space-y-6">
               {activeQuiz.questions.map((q, idx) => (
-                <div key={q.id} className="border border-gray-100 rounded-xl p-5">
+                <div key={q.id} className="border border-gray-100 dark:border-gray-700 rounded-xl p-5">
                   <div className="flex items-start gap-3 mb-3">
-                    <span className="w-7 h-7 bg-blue-50 rounded-full flex items-center justify-center text-xs font-bold text-blue-600">{idx + 1}</span>
+                    <span className="w-7 h-7 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center text-xs font-bold text-blue-600 dark:text-blue-400">{idx + 1}</span>
                     <div className="flex-1">
-                      <p className="font-medium text-sm">{q.text}</p>
-                      <p className="text-xs text-gray-500 mt-1">{q.points} points • {q.type.replace('_', '/')}</p>
+                      <p className="font-medium text-sm dark:text-white">{q.text}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{q.points} points • {q.type.replace('_', '/')}</p>
                     </div>
                   </div>
                   {q.type === 'mcq' || q.type === 'true_false' ? (
                     <div className="ml-10 space-y-2">
                       {q.options?.map((opt, oi) => (
-                        <label key={oi} className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${quizAnswers[q.id] === oi ? 'border-blue-300 bg-blue-50' : 'border-gray-100 hover:bg-gray-50'}`}>
+                        <label key={oi} className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${quizAnswers[q.id] === oi ? 'border-blue-300 bg-blue-50 dark:border-blue-500 dark:bg-blue-900/20' : 'border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/30'}`}>
                           <input type="radio" name={q.id} checked={quizAnswers[q.id] === oi} onChange={() => setQuizAnswers({ ...quizAnswers, [q.id]: oi })} className="accent-blue-600" />
-                          <span className="text-sm">{opt}</span>
+                          <span className="text-sm dark:text-gray-200">{opt}</span>
                         </label>
                       ))}
                     </div>
@@ -63,7 +63,7 @@ export default function AssessmentsPage() {
                       <textarea
                         value={(quizAnswers[q.id] as string) || ''}
                         onChange={e => setQuizAnswers({ ...quizAnswers, [q.id]: e.target.value })}
-                        className="w-full p-3 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
+                        className="w-full p-3 border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg text-sm focus:ring-2 focus:ring-blue-500"
                         rows={3}
                         placeholder="Type your answer here..."
                       />
@@ -85,8 +85,8 @@ export default function AssessmentsPage() {
     <div className="space-y-6 max-w-5xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Assessments</h1>
-          <p className="text-gray-500 text-sm">{assessments.length} total assessments</p>
+          <h1 className="text-2xl font-bold dark:text-white">Assessments</h1>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">{assessments.length} total assessments</p>
         </div>
         {user?.role === 'lecturer' && (
           <button className="bg-blue-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800 flex items-center gap-2">
@@ -98,7 +98,7 @@ export default function AssessmentsPage() {
       {/* Filter Pills */}
       <div className="flex gap-2 overflow-x-auto pb-2">
         {['all', 'active', 'upcoming', 'graded', 'closed'].map(f => (
-          <button key={f} onClick={() => setFilter(f)} className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${filter === f ? 'bg-blue-900 text-white' : 'bg-white border border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
+          <button key={f} onClick={() => setFilter(f)} className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${filter === f ? 'bg-blue-900 text-white' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'}`}>
             {f === 'all' ? 'All' : f.charAt(0).toUpperCase() + f.slice(1)}
           </button>
         ))}
@@ -109,34 +109,33 @@ export default function AssessmentsPage() {
         {filtered.map(a => {
           const sub = submissions.find(s => s.assessmentId === a.id && s.studentId === user?.id);
           return (
-            <div key={a.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:border-blue-200 transition-all">
+            <div key={a.id} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-5 hover:border-blue-200 dark:hover:border-blue-500/50 transition-all">
               <div className="flex items-start gap-4">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${a.type === 'quiz' ? 'bg-purple-50 text-purple-600' : a.type === 'assignment' ? 'bg-blue-50 text-blue-600' : 'bg-amber-50 text-amber-600'}`}>
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${a.type === 'quiz' ? 'bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' : a.type === 'assignment' ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400'}`}>
                   <ClipboardList className="w-6 h-6" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="font-semibold">{a.title}</h3>
-                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
-                      a.status === 'graded' ? 'bg-emerald-50 text-emerald-700' :
-                      a.status === 'active' ? 'bg-blue-50 text-blue-700' :
-                      a.status === 'upcoming' ? 'bg-amber-50 text-amber-700' : 'bg-gray-100 text-gray-600'
-                    }`}>{a.status}</span>
+                    <h3 className="font-semibold dark:text-white">{a.title}</h3>
+                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${a.status === 'graded' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' :
+                        a.status === 'active' ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
+                          a.status === 'upcoming' ? 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
+                      }`}>{a.status}</span>
                   </div>
-                  <p className="text-sm text-gray-500 mt-1">{a.description}</p>
-                  <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-gray-500">
-                    <span className="bg-gray-100 px-2 py-0.5 rounded font-medium">{a.courseCode}</span>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{a.description}</p>
+                  <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-gray-500 dark:text-gray-400">
+                    <span className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded font-medium dark:text-gray-300">{a.courseCode}</span>
                     <span className="capitalize">{a.type}</span>
                     <span>{a.totalPoints} points</span>
                     {a.duration && <span><Clock className="w-3 h-3 inline" /> {a.duration} min</span>}
                     <span><Clock className="w-3 h-3 inline" /> Due: {new Date(a.dueDate).toLocaleDateString('en-NG')}</span>
                   </div>
                   {sub && (
-                    <div className={`mt-3 p-2 rounded-lg text-xs ${sub.status === 'graded' ? 'bg-emerald-50' : 'bg-blue-50'}`}>
+                    <div className={`mt-3 p-2 rounded-lg text-xs ${sub.status === 'graded' ? 'bg-emerald-50 dark:bg-emerald-900/20' : 'bg-blue-50 dark:bg-blue-900/20'}`}>
                       {sub.status === 'graded' ? (
-                        <span className="text-emerald-700 font-medium">✅ Graded: {sub.score}/{sub.totalPoints} ({Math.round((sub.score! / sub.totalPoints) * 100)}%)</span>
+                        <span className="text-emerald-700 dark:text-emerald-400 font-medium">✅ Graded: {sub.score}/{sub.totalPoints} ({Math.round((sub.score! / sub.totalPoints) * 100)}%)</span>
                       ) : (
-                        <span className="text-blue-700 font-medium">📝 Submitted on {new Date(sub.submittedAt).toLocaleDateString('en-NG')}</span>
+                        <span className="text-blue-700 dark:text-blue-400 font-medium">📝 Submitted on {new Date(sub.submittedAt).toLocaleDateString('en-NG')}</span>
                       )}
                     </div>
                   )}

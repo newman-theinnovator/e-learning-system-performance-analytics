@@ -15,10 +15,10 @@ export default function LecturerDashboard({ onNavigate }: Props) {
   const ca = classAnalytics;
 
   const stats = [
-    { label: 'My Courses', value: myCourses.length, icon: BookOpen, bg: 'bg-blue-50', color: 'text-blue-600' },
-    { label: 'Total Students', value: totalStudents, icon: Users, bg: 'bg-emerald-50', color: 'text-emerald-600' },
-    { label: 'Pending Grading', value: pendingGrading, icon: ClipboardList, bg: 'bg-amber-50', color: 'text-amber-600' },
-    { label: 'Class Pass Rate', value: `${ca.passRate}%`, icon: Award, bg: 'bg-purple-50', color: 'text-purple-600' },
+    { label: 'My Courses', value: myCourses.length, icon: BookOpen, bg: 'bg-blue-50 dark:bg-blue-900/30', color: 'text-blue-600 dark:text-blue-400' },
+    { label: 'Total Students', value: totalStudents, icon: Users, bg: 'bg-emerald-50 dark:bg-emerald-900/30', color: 'text-emerald-600 dark:text-emerald-400' },
+    { label: 'Pending Grading', value: pendingGrading, icon: ClipboardList, bg: 'bg-amber-50 dark:bg-amber-900/30', color: 'text-amber-600 dark:text-amber-400' },
+    { label: 'Class Pass Rate', value: `${ca.passRate}%`, icon: Award, bg: 'bg-purple-50 dark:bg-purple-900/30', color: 'text-purple-600 dark:text-purple-400' },
   ];
 
   return (
@@ -33,22 +33,22 @@ export default function LecturerDashboard({ onNavigate }: Props) {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {stats.map((s, i) => (
-          <div key={i} className="bg-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm">
+          <div key={i} className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-100 dark:border-gray-700 shadow-sm">
             <div className={`w-9 h-9 sm:w-10 sm:h-10 ${s.bg} rounded-xl flex items-center justify-center mb-2 sm:mb-3`}>
               <s.icon className={`w-4 h-4 sm:w-5 sm:h-5 ${s.color}`} />
             </div>
-            <p className="text-xl sm:text-2xl font-bold">{s.value}</p>
-            <p className="text-[10px] sm:text-xs text-gray-500">{s.label}</p>
+            <p className="text-xl sm:text-2xl font-bold dark:text-white">{s.value}</p>
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">{s.label}</p>
           </div>
         ))}
       </div>
 
       <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Score Distribution */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-gray-100 shadow-sm p-4 sm:p-5">
+        <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-4 sm:p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-sm sm:text-base">SWE 401 - Score Distribution</h3>
-            <button onClick={() => onNavigate('analytics')} className="text-xs text-blue-600 font-medium flex items-center gap-1">
+            <h3 className="font-semibold text-sm sm:text-base dark:text-white">SWE 401 - Score Distribution</h3>
+            <button onClick={() => onNavigate('analytics')} className="text-xs text-blue-600 dark:text-blue-400 font-medium flex items-center gap-1">
               Analytics <ArrowRight className="w-3 h-3" />
             </button>
           </div>
@@ -70,21 +70,21 @@ export default function LecturerDashboard({ onNavigate }: Props) {
         </div>
 
         {/* At-Risk Students */}
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-          <h3 className="font-semibold mb-4 flex items-center gap-2">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-5">
+          <h3 className="font-semibold mb-4 flex items-center gap-2 dark:text-white">
             <AlertTriangle className="w-4 h-4 text-red-500" /> At-Risk Students
           </h3>
           <div className="space-y-3">
             {ca.atRiskStudents.map((s, i) => (
-              <div key={i} className="p-3 bg-red-50/50 rounded-lg border border-red-100">
+              <div key={i} className="p-3 bg-red-50/50 dark:bg-red-900/10 rounded-lg border border-red-100 dark:border-red-900/30">
                 <div className="flex items-center justify-between">
-                  <p className="font-medium text-sm">{s.name}</p>
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${s.trend === 'declining' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>
+                  <p className="font-medium text-sm dark:text-white">{s.name}</p>
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${s.trend === 'declining' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'}`}>
                     {s.trend}
                   </span>
                 </div>
-                <div className="flex gap-4 mt-2 text-xs text-gray-500">
-                  <span>Score: <strong className="text-red-600">{s.score}%</strong></span>
+                <div className="flex gap-4 mt-2 text-xs text-gray-500 dark:text-gray-400">
+                  <span>Score: <strong className="text-red-600 dark:text-red-400">{s.score}%</strong></span>
                   <span>Attendance: {s.attendance}%</span>
                 </div>
               </div>
@@ -94,8 +94,8 @@ export default function LecturerDashboard({ onNavigate }: Props) {
       </div>
 
       {/* Performance Trend */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 sm:p-5">
-        <h3 className="font-semibold text-sm sm:text-base mb-4">Class Performance Trend</h3>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-4 sm:p-5">
+        <h3 className="font-semibold text-sm sm:text-base mb-4 dark:text-white">Class Performance Trend</h3>
         <div className="h-48 sm:h-64">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={ca.performanceTrend}>
@@ -113,19 +113,19 @@ export default function LecturerDashboard({ onNavigate }: Props) {
       </div>
 
       {/* My Courses */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-5">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold">My Courses</h3>
-          <button onClick={() => onNavigate('courses')} className="text-xs text-blue-600 font-medium flex items-center gap-1">
+          <h3 className="font-semibold dark:text-white">My Courses</h3>
+          <button onClick={() => onNavigate('courses')} className="text-xs text-blue-600 dark:text-blue-400 font-medium flex items-center gap-1">
             Manage Courses <ArrowRight className="w-3 h-3" />
           </button>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {myCourses.map(c => (
-            <div key={c.id} className="border border-gray-100 rounded-xl p-4 hover:border-blue-200 hover:shadow-md transition-all cursor-pointer" onClick={() => onNavigate('courseDetail')}>
-              <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">{c.code}</span>
-              <h4 className="font-semibold text-sm mt-2 line-clamp-2">{c.title}</h4>
-              <div className="flex items-center gap-2 mt-3 text-xs text-gray-500">
+            <div key={c.id} className="border border-gray-100 dark:border-gray-700 rounded-xl p-4 hover:border-blue-200 dark:hover:border-blue-500/50 hover:shadow-md transition-all cursor-pointer dark:bg-gray-800/50" onClick={() => onNavigate('courseDetail')}>
+              <span className="text-xs font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded">{c.code}</span>
+              <h4 className="font-semibold text-sm mt-2 line-clamp-2 dark:text-white">{c.title}</h4>
+              <div className="flex items-center gap-2 mt-3 text-xs text-gray-500 dark:text-gray-400">
                 <Users className="w-3 h-3" />
                 <span>{c.enrolledStudents}/{c.maxStudents} students</span>
               </div>

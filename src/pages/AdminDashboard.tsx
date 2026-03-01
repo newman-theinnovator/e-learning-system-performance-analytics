@@ -8,10 +8,10 @@ export default function AdminDashboard({ onNavigate }: Props) {
   const admin = adminAnalytics;
 
   const stats = [
-    { label: 'Total Students', value: admin.totalStudents, icon: Users, bg: 'bg-blue-50', color: 'text-blue-600', change: '+12%' },
-    { label: 'Total Lecturers', value: admin.totalLecturers, icon: GraduationCap, bg: 'bg-emerald-50', color: 'text-emerald-600', change: '+2' },
-    { label: 'Active Courses', value: admin.activeCourses, icon: BookOpen, bg: 'bg-purple-50', color: 'text-purple-600', change: `/${admin.totalCourses}` },
-    { label: 'Dept. Pass Rate', value: `${admin.passRate}%`, icon: TrendingUp, bg: 'bg-amber-50', color: 'text-amber-600', change: '+3%' },
+    { label: 'Total Students', value: admin.totalStudents, icon: Users, bg: 'bg-blue-50 dark:bg-blue-900/30', color: 'text-blue-600 dark:text-blue-400', change: '+12%' },
+    { label: 'Total Lecturers', value: admin.totalLecturers, icon: GraduationCap, bg: 'bg-emerald-50 dark:bg-emerald-900/30', color: 'text-emerald-600 dark:text-emerald-400', change: '+2' },
+    { label: 'Active Courses', value: admin.activeCourses, icon: BookOpen, bg: 'bg-purple-50 dark:bg-purple-900/30', color: 'text-purple-600 dark:text-purple-400', change: `/${admin.totalCourses}` },
+    { label: 'Dept. Pass Rate', value: `${admin.passRate}%`, icon: TrendingUp, bg: 'bg-amber-50 dark:bg-amber-900/30', color: 'text-amber-600 dark:text-amber-400', change: '+3%' },
   ];
 
   const COLORS = ['#3B82F6', '#10B981', '#6366F1', '#F59E0B'];
@@ -21,8 +21,8 @@ export default function AdminDashboard({ onNavigate }: Props) {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold">Department Overview</h1>
-          <p className="text-gray-500 text-xs sm:text-sm">Software Engineering Department, ADUN</p>
+          <h1 className="text-xl sm:text-2xl font-bold dark:text-white">Department Overview</h1>
+          <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">Software Engineering Department, ADUN</p>
         </div>
         <button className="flex items-center justify-center gap-2 bg-blue-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800 transition-colors w-full sm:w-auto">
           <Download className="w-4 h-4" /> Export Report
@@ -32,23 +32,23 @@ export default function AdminDashboard({ onNavigate }: Props) {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {stats.map((s, i) => (
-          <div key={i} className="bg-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm">
+          <div key={i} className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 border border-gray-100 dark:border-gray-700 shadow-sm">
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div className={`w-9 h-9 sm:w-10 sm:h-10 ${s.bg} rounded-xl flex items-center justify-center`}>
                 <s.icon className={`w-4 h-4 sm:w-5 sm:h-5 ${s.color}`} />
               </div>
-              <span className="text-[10px] sm:text-xs text-emerald-600 font-medium bg-emerald-50 px-1.5 sm:px-2 py-0.5 rounded-full">{s.change}</span>
+              <span className="text-[10px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-medium bg-emerald-50 dark:bg-emerald-900/30 px-1.5 sm:px-2 py-0.5 rounded-full">{s.change}</span>
             </div>
-            <p className="text-xl sm:text-2xl font-bold">{s.value}</p>
-            <p className="text-[10px] sm:text-xs text-gray-500">{s.label}</p>
+            <p className="text-xl sm:text-2xl font-bold dark:text-white">{s.value}</p>
+            <p className="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">{s.label}</p>
           </div>
         ))}
       </div>
 
       <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Enrollment Trend */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-gray-100 shadow-sm p-4 sm:p-5">
-          <h3 className="font-semibold text-sm sm:text-base mb-4">Monthly Enrollment Trend</h3>
+        <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-4 sm:p-5">
+          <h3 className="font-semibold text-sm sm:text-base mb-4 dark:text-white">Monthly Enrollment Trend</h3>
           <div className="h-48 sm:h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={admin.monthlyEnrollments}>
@@ -63,8 +63,8 @@ export default function AdminDashboard({ onNavigate }: Props) {
         </div>
 
         {/* Level Distribution */}
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-          <h3 className="font-semibold mb-4">Students by Level</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-5">
+          <h3 className="font-semibold mb-4 dark:text-white">Students by Level</h3>
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -81,37 +81,37 @@ export default function AdminDashboard({ onNavigate }: Props) {
       </div>
 
       {/* Level Performance Table */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-        <h3 className="font-semibold mb-4">Performance by Level</h3>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-5">
+        <h3 className="font-semibold mb-4 dark:text-white">Performance by Level</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100">
-                <th className="text-left py-3 px-4 font-semibold text-gray-600">Level</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-600">Students</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-600">Avg GPA</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-600">Pass Rate</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-600">Status</th>
+              <tr className="border-b border-gray-100 dark:border-gray-700">
+                <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-300">Level</th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-300">Students</th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-300">Avg GPA</th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-300">Pass Rate</th>
+                <th className="text-left py-3 px-4 font-semibold text-gray-600 dark:text-gray-300">Status</th>
               </tr>
             </thead>
             <tbody>
               {admin.departmentPerformance.map((dp, i) => (
-                <tr key={i} className="border-b border-gray-50 hover:bg-gray-50">
-                  <td className="py-3 px-4 font-medium">{dp.level}</td>
-                  <td className="py-3 px-4">{dp.students}</td>
+                <tr key={i} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/30">
+                  <td className="py-3 px-4 font-medium dark:text-white">{dp.level}</td>
+                  <td className="py-3 px-4 dark:text-gray-300">{dp.students}</td>
                   <td className="py-3 px-4">
-                    <span className={`font-semibold ${dp.avgGPA >= 3.5 ? 'text-emerald-600' : dp.avgGPA >= 3.0 ? 'text-blue-600' : 'text-amber-600'}`}>{dp.avgGPA}</span>
+                    <span className={`font-semibold ${dp.avgGPA >= 3.5 ? 'text-emerald-600 dark:text-emerald-400' : dp.avgGPA >= 3.0 ? 'text-blue-600 dark:text-blue-400' : 'text-amber-600 dark:text-amber-400'}`}>{dp.avgGPA}</span>
                   </td>
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2">
-                      <div className="w-24 bg-gray-100 rounded-full h-2">
+                      <div className="w-24 bg-gray-100 dark:bg-gray-700 rounded-full h-2">
                         <div className="bg-emerald-500 h-2 rounded-full" style={{ width: `${dp.passRate}%` }} />
                       </div>
-                      <span className="text-xs font-medium">{dp.passRate}%</span>
+                      <span className="text-xs font-medium dark:text-gray-300">{dp.passRate}%</span>
                     </div>
                   </td>
                   <td className="py-3 px-4">
-                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${dp.passRate >= 85 ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}`}>
+                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${dp.passRate >= 85 ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' : 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'}`}>
                       {dp.passRate >= 85 ? 'Good' : 'Needs Attention'}
                     </span>
                   </td>
@@ -124,18 +124,18 @@ export default function AdminDashboard({ onNavigate }: Props) {
 
       {/* Course Popularity & User Management */}
       <div className="grid lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-          <h3 className="font-semibold mb-4">Most Popular Courses</h3>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-5">
+          <h3 className="font-semibold mb-4 dark:text-white">Most Popular Courses</h3>
           <div className="space-y-3">
             {admin.coursePopularity.map((c, i) => (
               <div key={i} className="flex items-center gap-3">
-                <span className="text-xs font-bold text-gray-400 w-4">{i + 1}</span>
+                <span className="text-xs font-bold text-gray-400 dark:text-gray-500 w-4">{i + 1}</span>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-medium">{c.course}</span>
-                    <span className="text-xs text-gray-500">{c.enrolled} students</span>
+                    <span className="text-sm font-medium dark:text-white">{c.course}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">{c.enrolled} students</span>
                   </div>
-                  <div className="w-full bg-gray-100 rounded-full h-2">
+                  <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
                     <div className="bg-gradient-to-r from-blue-600 to-blue-400 h-2 rounded-full" style={{ width: `${(c.enrolled / 65) * 100}%` }} />
                   </div>
                 </div>
@@ -144,24 +144,24 @@ export default function AdminDashboard({ onNavigate }: Props) {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold">Recent Users</h3>
-            <button onClick={() => onNavigate('users')} className="text-xs text-blue-600 font-medium flex items-center gap-1">
+            <h3 className="font-semibold dark:text-white">Recent Users</h3>
+            <button onClick={() => onNavigate('users')} className="text-xs text-blue-600 dark:text-blue-400 font-medium flex items-center gap-1">
               Manage Users <ArrowRight className="w-3 h-3" />
             </button>
           </div>
           <div className="space-y-3">
             {users.slice(0, 5).map(u => (
-              <div key={u.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50">
+              <div key={u.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30">
                 <div className={`w-9 h-9 rounded-full flex items-center justify-center text-white font-semibold text-xs ${u.role === 'student' ? 'bg-emerald-500' : u.role === 'lecturer' ? 'bg-blue-500' : 'bg-purple-500'}`}>
                   {u.firstName[0]}{u.lastName[0]}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">{u.firstName} {u.lastName}</p>
-                  <p className="text-xs text-gray-500">{u.email}</p>
+                  <p className="text-sm font-medium truncate dark:text-white">{u.firstName} {u.lastName}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{u.email}</p>
                 </div>
-                <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium capitalize ${u.role === 'student' ? 'bg-emerald-50 text-emerald-700' : u.role === 'lecturer' ? 'bg-blue-50 text-blue-700' : 'bg-purple-50 text-purple-700'}`}>
+                <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium capitalize ${u.role === 'student' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' : u.role === 'lecturer' ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400'}`}>
                   {u.role}
                 </span>
               </div>

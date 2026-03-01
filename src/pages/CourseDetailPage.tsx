@@ -68,15 +68,14 @@ export default function CourseDetailPage(_props: Props) {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
-        <div className="flex border-b border-gray-100 overflow-x-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
+        <div className="flex border-b border-gray-100 dark:border-gray-700 overflow-x-auto">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-5 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-                activeTab === tab.id ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'
-              }`}
+              className={`flex items-center gap-2 px-5 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400' : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
             >
               <tab.icon className="w-4 h-4" /> {tab.label}
             </button>
@@ -88,34 +87,34 @@ export default function CourseDetailPage(_props: Props) {
           {activeTab === 'content' && (
             <div className="space-y-3">
               {course.modules.map(mod => (
-                <div key={mod.id} className="border border-gray-100 rounded-xl overflow-hidden">
+                <div key={mod.id} className="border border-gray-100 dark:border-gray-700 rounded-xl overflow-hidden">
                   <button
                     onClick={() => setExpandedModule(expandedModule === mod.id ? null : mod.id)}
-                    className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
+                    className="w-full flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
                   >
                     <div className="flex items-center gap-3">
                       {mod.isCompleted ? (
                         <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                       ) : (
-                        <Circle className="w-5 h-5 text-gray-300" />
+                        <Circle className="w-5 h-5 text-gray-300 dark:text-gray-600" />
                       )}
                       <div className="text-left">
-                        <p className="font-semibold text-sm">Module {mod.order}: {mod.title}</p>
-                        <p className="text-xs text-gray-500">{mod.description} • {mod.contents.length} items</p>
+                        <p className="font-semibold text-sm dark:text-white">Module {mod.order}: {mod.title}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{mod.description} • {mod.contents.length} items</p>
                       </div>
                     </div>
                     {expandedModule === mod.id ? <ChevronDown className="w-5 h-5 text-gray-400" /> : <ChevronRight className="w-5 h-5 text-gray-400" />}
                   </button>
                   {expandedModule === mod.id && mod.contents.length > 0 && (
-                    <div className="border-t border-gray-100 bg-gray-50/50 p-3 space-y-2">
+                    <div className="border-t border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 p-3 space-y-2">
                       {mod.contents.map(content => (
-                        <div key={content.id} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gray-100 hover:border-blue-200 hover:shadow-sm transition-all cursor-pointer">
-                          <div className="w-9 h-9 rounded-lg bg-gray-50 flex items-center justify-center">
+                        <div key={content.id} className="flex items-center gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-500/50 hover:shadow-sm transition-all cursor-pointer">
+                          <div className="w-9 h-9 rounded-lg bg-gray-50 dark:bg-gray-700 flex items-center justify-center">
                             {contentIcon(content.type)}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium truncate">{content.title}</p>
-                            <p className="text-xs text-gray-500 capitalize">{content.type} {content.duration ? `• ${content.duration}` : ''} {content.size ? `• ${content.size}` : ''}</p>
+                            <p className="text-sm font-medium truncate dark:text-gray-200">{content.title}</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{content.type} {content.duration ? `• ${content.duration}` : ''} {content.size ? `• ${content.size}` : ''}</p>
                           </div>
                           {content.type === 'video' ? (
                             <Play className="w-4 h-4 text-blue-600" />
@@ -135,25 +134,24 @@ export default function CourseDetailPage(_props: Props) {
           {activeTab === 'assessments' && (
             <div className="space-y-3">
               {courseAssessments.map(a => (
-                <div key={a.id} className="flex items-center gap-4 p-4 border border-gray-100 rounded-xl hover:border-blue-200 transition-colors">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${a.type === 'quiz' ? 'bg-purple-50 text-purple-600' : 'bg-blue-50 text-blue-600'}`}>
+                <div key={a.id} className="flex items-center gap-4 p-4 border border-gray-100 dark:border-gray-700 rounded-xl hover:border-blue-200 dark:hover:border-blue-500/50 transition-colors">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${a.type === 'quiz' ? 'bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' : 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400'}`}>
                     <ClipboardList className="w-6 h-6" />
                   </div>
                   <div className="flex-1">
-                    <p className="font-semibold text-sm">{a.title}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{a.description}</p>
-                    <div className="flex gap-3 mt-2 text-xs text-gray-500">
-                      <span className="capitalize bg-gray-100 px-2 py-0.5 rounded">{a.type}</span>
+                    <p className="font-semibold text-sm dark:text-white">{a.title}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{a.description}</p>
+                    <div className="flex gap-3 mt-2 text-xs text-gray-500 dark:text-gray-400">
+                      <span className="capitalize bg-gray-100 dark:bg-gray-700 dark:text-gray-300 px-2 py-0.5 rounded">{a.type}</span>
                       <span>{a.totalPoints} points</span>
                       {a.duration && <span>{a.duration} min</span>}
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${
-                      a.status === 'graded' ? 'bg-emerald-50 text-emerald-700' :
-                      a.status === 'active' ? 'bg-blue-50 text-blue-700' :
-                      a.status === 'upcoming' ? 'bg-amber-50 text-amber-700' : 'bg-gray-100 text-gray-600'
-                    }`}>{a.status}</span>
+                    <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${a.status === 'graded' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' :
+                        a.status === 'active' ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
+                          a.status === 'upcoming' ? 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400' : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
+                      }`}>{a.status}</span>
                     <p className="text-xs text-gray-500 mt-2 flex items-center gap-1 justify-end">
                       <Clock className="w-3 h-3" />
                       Due: {new Date(a.dueDate).toLocaleDateString('en-NG', { month: 'short', day: 'numeric', year: 'numeric' })}
@@ -173,33 +171,33 @@ export default function CourseDetailPage(_props: Props) {
                 </button>
               </div>
               {courseForums.map(post => (
-                <div key={post.id} className={`border rounded-xl p-4 ${post.isPinned ? 'border-amber-200 bg-amber-50/30' : 'border-gray-100'}`}>
+                <div key={post.id} className={`border rounded-xl p-4 ${post.isPinned ? 'border-amber-200 bg-amber-50/30 dark:border-amber-500/30 dark:bg-amber-900/10' : 'border-gray-100 dark:border-gray-700'}`}>
                   <div className="flex items-start gap-3">
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold ${post.authorRole === 'lecturer' ? 'bg-blue-500' : 'bg-emerald-500'}`}>
                       {post.authorName.split(' ').map(n => n[0]).join('').slice(0, 2)}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-semibold text-sm">{post.authorName}</span>
-                        <span className={`text-[10px] px-1.5 py-0.5 rounded capitalize ${post.authorRole === 'lecturer' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700'}`}>{post.authorRole}</span>
-                        {post.isPinned && <span className="text-[10px] bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">📌 Pinned</span>}
+                        <span className="font-semibold text-sm dark:text-white">{post.authorName}</span>
+                        <span className={`text-[10px] px-1.5 py-0.5 rounded capitalize ${post.authorRole === 'lecturer' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'}`}>{post.authorRole}</span>
+                        {post.isPinned && <span className="text-[10px] bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 px-1.5 py-0.5 rounded">📌 Pinned</span>}
                       </div>
-                      <h4 className="font-semibold text-sm mt-1">{post.title}</h4>
-                      <p className="text-xs text-gray-600 mt-1 whitespace-pre-line">{post.content}</p>
-                      <div className="flex items-center gap-4 mt-3 text-xs text-gray-500">
+                      <h4 className="font-semibold text-sm mt-1 dark:text-white">{post.title}</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 mt-1 whitespace-pre-line">{post.content}</p>
+                      <div className="flex items-center gap-4 mt-3 text-xs text-gray-500 dark:text-gray-400">
                         <span>❤️ {post.likes}</span>
                         <span>💬 {post.replies.length} replies</span>
                         <span>{new Date(post.createdAt).toLocaleDateString('en-NG')}</span>
                       </div>
                       {post.replies.length > 0 && (
-                        <div className="mt-3 space-y-2 pl-4 border-l-2 border-gray-200">
+                        <div className="mt-3 space-y-2 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
                           {post.replies.map(r => (
-                            <div key={r.id} className="bg-gray-50 rounded-lg p-3">
+                            <div key={r.id} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
                               <div className="flex items-center gap-2">
-                                <span className="font-medium text-xs">{r.authorName}</span>
-                                <span className={`text-[10px] px-1.5 py-0.5 rounded capitalize ${r.authorRole === 'lecturer' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700'}`}>{r.authorRole}</span>
+                                <span className="font-medium text-xs dark:text-gray-200">{r.authorName}</span>
+                                <span className={`text-[10px] px-1.5 py-0.5 rounded capitalize ${r.authorRole === 'lecturer' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'}`}>{r.authorRole}</span>
                               </div>
-                              <p className="text-xs text-gray-600 mt-1">{r.content}</p>
+                              <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">{r.content}</p>
                               <span className="text-[10px] text-gray-400 mt-1 block">❤️ {r.likes} • {new Date(r.createdAt).toLocaleDateString('en-NG')}</span>
                             </div>
                           ))}
@@ -216,28 +214,28 @@ export default function CourseDetailPage(_props: Props) {
           {activeTab === 'info' && (
             <div className="space-y-6">
               <div>
-                <h3 className="font-semibold mb-2">Course Description</h3>
-                <p className="text-sm text-gray-600">{course.description}</p>
+                <h3 className="font-semibold mb-2 dark:text-white">Course Description</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-300">{course.description}</p>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
-                <div className="bg-gray-50 rounded-xl p-4">
-                  <h4 className="font-medium text-sm mb-3">Course Details</h4>
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 border border-transparent dark:border-gray-700">
+                  <h4 className="font-medium text-sm mb-3 dark:text-white">Course Details</h4>
                   <div className="space-y-2 text-sm">
-                    <div className="flex justify-between"><span className="text-gray-500">Course Code</span><span className="font-medium">{course.code}</span></div>
-                    <div className="flex justify-between"><span className="text-gray-500">Level</span><span className="font-medium">{course.level} Level</span></div>
-                    <div className="flex justify-between"><span className="text-gray-500">Semester</span><span className="font-medium">{course.semester}</span></div>
-                    <div className="flex justify-between"><span className="text-gray-500">Category</span><span className="font-medium">{course.category}</span></div>
-                    <div className="flex justify-between"><span className="text-gray-500">Status</span><span className="font-medium capitalize">{course.status}</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500 dark:text-gray-400">Course Code</span><span className="font-medium dark:text-gray-200">{course.code}</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500 dark:text-gray-400">Level</span><span className="font-medium dark:text-gray-200">{course.level} Level</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500 dark:text-gray-400">Semester</span><span className="font-medium dark:text-gray-200">{course.semester}</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500 dark:text-gray-400">Category</span><span className="font-medium dark:text-gray-200">{course.category}</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500 dark:text-gray-400">Status</span><span className="font-medium capitalize dark:text-gray-200">{course.status}</span></div>
                   </div>
                 </div>
-                <div className="bg-gray-50 rounded-xl p-4">
-                  <h4 className="font-medium text-sm mb-3">Enrollment</h4>
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 border border-transparent dark:border-gray-700">
+                  <h4 className="font-medium text-sm mb-3 dark:text-white">Enrollment</h4>
                   <div className="space-y-2 text-sm">
-                    <div className="flex justify-between"><span className="text-gray-500">Enrolled</span><span className="font-medium">{course.enrolledStudents}</span></div>
-                    <div className="flex justify-between"><span className="text-gray-500">Max Capacity</span><span className="font-medium">{course.maxStudents}</span></div>
-                    <div className="flex justify-between"><span className="text-gray-500">Lecturer</span><span className="font-medium">{course.lecturerName}</span></div>
-                    <div className="flex justify-between"><span className="text-gray-500">Modules</span><span className="font-medium">{course.modules.length}</span></div>
-                    <div className="flex justify-between"><span className="text-gray-500">Assessments</span><span className="font-medium">{courseAssessments.length}</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500 dark:text-gray-400">Enrolled</span><span className="font-medium dark:text-gray-200">{course.enrolledStudents}</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500 dark:text-gray-400">Max Capacity</span><span className="font-medium dark:text-gray-200">{course.maxStudents}</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500 dark:text-gray-400">Lecturer</span><span className="font-medium dark:text-gray-200">{course.lecturerName}</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500 dark:text-gray-400">Modules</span><span className="font-medium dark:text-gray-200">{course.modules.length}</span></div>
+                    <div className="flex justify-between"><span className="text-gray-500 dark:text-gray-400">Assessments</span><span className="font-medium dark:text-gray-200">{courseAssessments.length}</span></div>
                   </div>
                 </div>
               </div>

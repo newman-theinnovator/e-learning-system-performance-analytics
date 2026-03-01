@@ -23,7 +23,7 @@ Check out the live demo of the user interface (hosted on Vercel):
 ### UI Enhancements Walkthrough
 *Here is a recorded demonstration of the glassmorphic UI, animations, and dark mode capabilities:*
 
-![UI Enhancement Demo](file:///C:/Users/ukpak/.gemini/antigravity/brain/57b89b13-1bde-422a-950e-25689d2d3e9b/ui_enhancement_demo_1772310710600.webp)
+![UI Enhancement Demo](public/assets/ui_enhancement_demo.webp)
 
 ## 🛠️ Tech Stack
 

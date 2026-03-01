@@ -10,7 +10,7 @@ export default function ForumPage() {
     return (
       <div className="max-w-3xl mx-auto space-y-4">
         <button onClick={() => setSelectedPost(null)} className="text-sm text-blue-600 font-medium">← Back to Forum</button>
-        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 sm:p-6">
           <div className="flex items-start gap-3">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${post.authorRole === 'lecturer' ? 'bg-blue-500' : 'bg-emerald-500'}`}>
               {post.authorName.split(' ').map(n => n[0]).join('').slice(0, 2)}
@@ -35,7 +35,7 @@ export default function ForumPage() {
         <div className="space-y-3">
           <h3 className="font-semibold text-gray-600 text-sm">{post.replies.length} Replies</h3>
           {post.replies.map(r => (
-            <div key={r.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 ml-6">
+            <div key={r.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-3 sm:p-4 ml-3 sm:ml-6">
               <div className="flex items-start gap-3">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs ${r.authorRole === 'lecturer' ? 'bg-blue-500' : 'bg-emerald-500'}`}>
                   {r.authorName.split(' ').map(n => n[0]).join('').slice(0, 2)}
@@ -54,7 +54,7 @@ export default function ForumPage() {
               </div>
             </div>
           ))}
-          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 ml-6">
+          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-3 sm:p-4 ml-3 sm:ml-6">
             <textarea className="w-full p-3 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500" rows={3} placeholder="Write a reply..." />
             <div className="flex justify-end mt-2">
               <button className="bg-blue-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800">Reply</button>
@@ -67,17 +67,17 @@ export default function ForumPage() {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold">Discussion Forum</h1>
-          <p className="text-gray-500 text-sm">{forumPosts.length} discussions</p>
+          <h1 className="text-xl sm:text-2xl font-bold">Discussion Forum</h1>
+          <p className="text-gray-500 text-xs sm:text-sm">{forumPosts.length} discussions</p>
         </div>
-        <button className="bg-blue-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800">+ New Discussion</button>
+        <button className="bg-blue-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800 w-full sm:w-auto">+ New Discussion</button>
       </div>
 
       <div className="space-y-3">
         {forumPosts.map(p => (
-          <div key={p.id} onClick={() => setSelectedPost(p.id)} className={`bg-white rounded-xl border shadow-sm p-5 cursor-pointer hover:shadow-md transition-all ${p.isPinned ? 'border-amber-200 bg-amber-50/20' : 'border-gray-100'}`}>
+          <div key={p.id} onClick={() => setSelectedPost(p.id)} className={`bg-white rounded-xl border shadow-sm p-4 sm:p-5 cursor-pointer hover:shadow-md transition-all ${p.isPinned ? 'border-amber-200 bg-amber-50/20' : 'border-gray-100'}`}>
             <div className="flex items-start gap-3">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0 ${p.authorRole === 'lecturer' ? 'bg-blue-500' : 'bg-emerald-500'}`}>
                 {p.authorName.split(' ').map(n => n[0]).join('').slice(0, 2)}

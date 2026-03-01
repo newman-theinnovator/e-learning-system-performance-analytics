@@ -22,13 +22,13 @@ export default function CoursesPage({ onNavigate }: Props) {
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-bold">{user?.role === 'student' ? 'My Courses' : 'Course Management'}</h1>
-          <p className="text-gray-500 text-sm">{filtered.length} courses available</p>
+          <h1 className="text-xl sm:text-2xl font-bold">{user?.role === 'student' ? 'My Courses' : 'Course Management'}</h1>
+          <p className="text-gray-500 text-xs sm:text-sm">{filtered.length} courses available</p>
         </div>
         {user?.role !== 'student' && (
-          <button className="bg-blue-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800 transition-colors flex items-center gap-2">
+          <button className="bg-blue-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800 transition-colors flex items-center justify-center gap-2 w-full sm:w-auto">
             <BookOpen className="w-4 h-4" /> Create Course
           </button>
         )}

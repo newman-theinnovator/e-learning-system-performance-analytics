@@ -67,7 +67,7 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
   const unreadCount = notifications.filter(n => n.unread).length;
 
   return (
-    <div className={`min-h-screen flex ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
+    <div className={`min-h-screen flex overflow-x-hidden ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
       {/* Sidebar */}
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-auto ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col`}>
         {/* Logo */}
@@ -89,13 +89,12 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
             <button
               key={item.id}
               onClick={() => { onNavigate(item.id); setSidebarOpen(false); }}
-              className={`group w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-all duration-300 animate-fade-in-up hover:scale-[1.02] ${
-                currentPage === item.id
+              className={`group w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-all duration-300 animate-fade-in-up hover:scale-[1.02] ${currentPage === item.id
                   ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/30'
                   : darkMode
                     ? 'text-gray-300 hover:bg-gray-800 hover:text-white'
                     : 'text-gray-600 hover:bg-white hover:shadow-sm hover:text-blue-600'
-              }`}
+                }`}
               style={{ animationDelay: `${index * 50}ms` }}
             >
               <item.icon className="w-5 h-5 transition-transform group-hover:scale-110" />
@@ -112,13 +111,12 @@ export default function Layout({ children, currentPage, onNavigate }: LayoutProp
               <button
                 key={role}
                 onClick={() => switchRole(role)}
-                className={`flex-1 text-xs py-1.5 rounded-md font-medium capitalize transition-all ${
-                  user.role === role
+                className={`flex-1 text-xs py-1.5 rounded-md font-medium capitalize transition-all ${user.role === role
                     ? `${roleColors[role]} text-white shadow-sm`
                     : darkMode
                       ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 {role}
               </button>

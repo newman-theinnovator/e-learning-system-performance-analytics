@@ -24,40 +24,40 @@ export default function LecturerDashboard({ onNavigate }: Props) {
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* Welcome */}
-      <div className="bg-gradient-to-r from-blue-800 to-indigo-800 rounded-2xl p-6 text-white">
-        <h1 className="text-2xl font-bold">{user.firstName} {user.lastName}</h1>
-        <p className="text-blue-200 text-sm mt-1">{user.staffId} • Department of {user.department}</p>
-        <p className="text-blue-300 text-xs mt-2">You have {pendingGrading} submissions awaiting grading and {ca.atRiskStudents.length} at-risk students.</p>
+      <div className="bg-gradient-to-r from-blue-800 to-indigo-800 rounded-2xl p-5 sm:p-6 text-white">
+        <h1 className="text-xl sm:text-2xl font-bold">{user.firstName} {user.lastName}</h1>
+        <p className="text-blue-200 text-xs sm:text-sm mt-1">{user.staffId} • Department of {user.department}</p>
+        <p className="text-blue-300 text-xs mt-2">{pendingGrading} submissions awaiting grading • {ca.atRiskStudents.length} at-risk students</p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {stats.map((s, i) => (
-          <div key={i} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
-            <div className={`w-10 h-10 ${s.bg} rounded-xl flex items-center justify-center mb-3`}>
-              <s.icon className={`w-5 h-5 ${s.color}`} />
+          <div key={i} className="bg-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm">
+            <div className={`w-9 h-9 sm:w-10 sm:h-10 ${s.bg} rounded-xl flex items-center justify-center mb-2 sm:mb-3`}>
+              <s.icon className={`w-4 h-4 sm:w-5 sm:h-5 ${s.color}`} />
             </div>
-            <p className="text-2xl font-bold">{s.value}</p>
-            <p className="text-xs text-gray-500">{s.label}</p>
+            <p className="text-xl sm:text-2xl font-bold">{s.value}</p>
+            <p className="text-[10px] sm:text-xs text-gray-500">{s.label}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Score Distribution */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-gray-100 shadow-sm p-5">
+        <div className="lg:col-span-2 bg-white rounded-xl border border-gray-100 shadow-sm p-4 sm:p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold">SWE 401 - Score Distribution</h3>
+            <h3 className="font-semibold text-sm sm:text-base">SWE 401 - Score Distribution</h3>
             <button onClick={() => onNavigate('analytics')} className="text-xs text-blue-600 font-medium flex items-center gap-1">
-              Full Analytics <ArrowRight className="w-3 h-3" />
+              Analytics <ArrowRight className="w-3 h-3" />
             </button>
           </div>
-          <div className="h-56">
+          <div className="h-48 sm:h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={ca.scoreDistribution}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="range" tick={{ fontSize: 11 }} />
-                <YAxis tick={{ fontSize: 11 }} />
+                <XAxis dataKey="range" tick={{ fontSize: 10 }} />
+                <YAxis tick={{ fontSize: 10 }} />
                 <Tooltip />
                 <Bar dataKey="count" radius={[6, 6, 0, 0]}>
                   {ca.scoreDistribution.map((entry, index) => (
@@ -94,17 +94,17 @@ export default function LecturerDashboard({ onNavigate }: Props) {
       </div>
 
       {/* Performance Trend */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-        <h3 className="font-semibold mb-4">Class Performance Trend</h3>
-        <div className="h-64">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 sm:p-5">
+        <h3 className="font-semibold text-sm sm:text-base mb-4">Class Performance Trend</h3>
+        <div className="h-48 sm:h-64">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={ca.performanceTrend}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-              <XAxis dataKey="assessment" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} />
+              <XAxis dataKey="assessment" tick={{ fontSize: 10 }} />
+              <YAxis tick={{ fontSize: 10 }} />
               <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="classAvg" stroke="#3B82F6" strokeWidth={2} name="Class Average" />
+              <Legend wrapperStyle={{ fontSize: '11px' }} />
+              <Line type="monotone" dataKey="classAvg" stroke="#3B82F6" strokeWidth={2} name="Class Avg" />
               <Line type="monotone" dataKey="topQuartile" stroke="#10B981" strokeWidth={2} name="Top 25%" strokeDasharray="5 5" />
               <Line type="monotone" dataKey="bottomQuartile" stroke="#EF4444" strokeWidth={2} name="Bottom 25%" strokeDasharray="5 5" />
             </LineChart>

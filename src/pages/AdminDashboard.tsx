@@ -19,42 +19,42 @@ export default function AdminDashboard({ onNavigate }: Props) {
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl font-bold">Department Overview</h1>
-          <p className="text-gray-500 text-sm">Software Engineering Department, ADUN</p>
+          <h1 className="text-xl sm:text-2xl font-bold">Department Overview</h1>
+          <p className="text-gray-500 text-xs sm:text-sm">Software Engineering Department, ADUN</p>
         </div>
-        <button className="flex items-center gap-2 bg-blue-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800 transition-colors">
+        <button className="flex items-center justify-center gap-2 bg-blue-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800 transition-colors w-full sm:w-auto">
           <Download className="w-4 h-4" /> Export Report
         </button>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {stats.map((s, i) => (
-          <div key={i} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
-            <div className="flex items-center justify-between mb-3">
-              <div className={`w-10 h-10 ${s.bg} rounded-xl flex items-center justify-center`}>
-                <s.icon className={`w-5 h-5 ${s.color}`} />
+          <div key={i} className="bg-white rounded-xl p-3 sm:p-4 border border-gray-100 shadow-sm">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <div className={`w-9 h-9 sm:w-10 sm:h-10 ${s.bg} rounded-xl flex items-center justify-center`}>
+                <s.icon className={`w-4 h-4 sm:w-5 sm:h-5 ${s.color}`} />
               </div>
-              <span className="text-xs text-emerald-600 font-medium bg-emerald-50 px-2 py-0.5 rounded-full">{s.change}</span>
+              <span className="text-[10px] sm:text-xs text-emerald-600 font-medium bg-emerald-50 px-1.5 sm:px-2 py-0.5 rounded-full">{s.change}</span>
             </div>
-            <p className="text-2xl font-bold">{s.value}</p>
-            <p className="text-xs text-gray-500">{s.label}</p>
+            <p className="text-xl sm:text-2xl font-bold">{s.value}</p>
+            <p className="text-[10px] sm:text-xs text-gray-500">{s.label}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Enrollment Trend */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-          <h3 className="font-semibold mb-4">Monthly Enrollment Trend</h3>
-          <div className="h-56">
+        <div className="lg:col-span-2 bg-white rounded-xl border border-gray-100 shadow-sm p-4 sm:p-5">
+          <h3 className="font-semibold text-sm sm:text-base mb-4">Monthly Enrollment Trend</h3>
+          <div className="h-48 sm:h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={admin.monthlyEnrollments}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="month" tick={{ fontSize: 11 }} />
-                <YAxis tick={{ fontSize: 11 }} />
+                <XAxis dataKey="month" tick={{ fontSize: 10 }} />
+                <YAxis tick={{ fontSize: 10 }} />
                 <Tooltip />
                 <Bar dataKey="count" fill="#1e3a5f" radius={[6, 6, 0, 0]} />
               </BarChart>
